@@ -1,4 +1,4 @@
 # Automatizar-instalacao-Kubuntu
 
-Linux-Mint-19.x-PosInstall
-Shell Script de pós instalação do Linux Kubuntu 20.x para utilização pessoal.
+Kubuntu-linux-20.x-PosInstall
+Shell Script de pós instalação do Kubuntu 20.x Linux para utilização pessoal.
