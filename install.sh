@@ -8,6 +8,7 @@ PROGRAMAS_PARA_INSTALAR_SNAP=(
 
 PROGRAMAS_PARA_INSTALAR=(
     python3
+    nodejs
     docker
     maven
     postgresql
