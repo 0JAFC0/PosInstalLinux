@@ -4,6 +4,7 @@ PROGRAMAS_PARA_INSTALAR_SNAP=(
     brave
     typora
     postman
+    code
 )
 
 PROGRAMAS_PARA_INSTALAR=(
@@ -14,7 +15,6 @@ PROGRAMAS_PARA_INSTALAR=(
     postgresql
     discord
     gimp
-    code
     okular
 )
 
@@ -37,8 +37,10 @@ sudo ln -s /var/lib/snapd/snap /snap
 # -------------- laços de instalação --------------
 # Instalando programas pelo pacman
 for nome_programa in ${PROGRAMAS_PARA_INSTALAR[@]}; do
-    if ! dpkg -1 | grep -q $nome_programa; then
+    $nome_programa = "code"
+    if ! [ -x "$(command -v $nome_programa)" ]; then
         sudo pacman -S "$nome_programa"
+        exit 1
     else
         echo "[INSTALADO]" - $nome_programa
     fi
@@ -49,10 +51,11 @@ for nome_programa in ${PROGRAMAS_PARA_INSTALAR_SNAP[@]}; do
     
     if [ $nome_programa == code ]; then
         sudo snap install "$nome_programa" --classic
-    elif [ ! dpkg -l | grep -q $nome_programa ]; then
+    elif ! [ -x "$(command -v $nome_programa)" ]; then
         sudo snap install "$nome_programa"
+        exit 1
     else
-        echo "[INSTALADO] - $nome_programa"
+        echo "[INSTALADO]" - $nome_programa
     fi
 done
 
