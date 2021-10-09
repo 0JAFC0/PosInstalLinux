@@ -1,19 +1,20 @@
 #! /usr/bin/env bash
 # -------------- variaveis --------------
 PROGRAMAS_PARA_INSTALAR_SNAP=(
-    code
     brave
-    okular
-    figma-linux
     typora
     postman
-    gimp
 )
 
 PROGRAMAS_PARA_INSTALAR=(
     python3
     docker
     maven
+    postgresql
+    discord
+    gimp
+    code
+    okular
 )
 
 # removendo travas
@@ -72,7 +73,6 @@ makepkg -si
 rm -r jdk11
 
 # -------------- PÓS-INSTALAÇÃO --------------
-## Finalização, atualização e limpeza##
+## atualização e limpeza##
 sudo pacman -Syyu
-flatpak update
 sudo pacman -Rs
