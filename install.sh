@@ -11,6 +11,7 @@ PROGRAMAS_PARA_INSTALAR=(
     python3
     nodejs
     docker
+    docker-compose
     maven
     postgresql
     discord
