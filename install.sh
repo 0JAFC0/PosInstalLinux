@@ -84,8 +84,10 @@ sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add 
 
 # Adicionando chave de pacote do Code
 printLinha "Adicionando Pacote do vscode"
-curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
-sudo mv microsoft.gpg /etc/apt/trusted.gpg.d/microsoft.gpg
+curl -sSL https://packages.microsoft.com/keys/microsoft.asc -o microsoft.asc
+gpg --no-default-keyring --keyring ./ms_signing_key_temp.gpg --import ./microsoft.asc
+gpg --no-default-keyring --keyring ./ms_signing_key_temp.gpg --export > ./ms_signing_key.gpg
+sudo mv ms_signing_key.gpg /etc/apt/trusted.gpg.d/
 
 # Adicionando chave de pacote do Pgadmin4
 printLinha "Adicionando Pacote do Pgadmin4"
@@ -103,7 +105,6 @@ for nome_programa in ${PROGRAMAS_PARA_INSTALAR[@]}; do
     if ! [ -x "$(command -v $nome_programa)" ]; then
         printLinha "[INSTALANDO...] $nome_programa"
         sudo apt install "$nome_programa" -y
-        exit 1
     else
         echo "[INSTALADO]" - $nome_programa
     fi
