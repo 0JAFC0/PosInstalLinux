@@ -5,19 +5,20 @@ Shell Script de pós instalação do Arch Linux para utilização pessoal e tamb
 
 Automatização de instalação:
 
-- vscode
-- brave
-- okular
-- figma
-- typora
-- postman
-- gimp
+- git
 - python3
+- nodejs
 - docker
+- docker-compose
+- openjdk-8-jdk 
+- openjdk-11-jdk
 - maven
-- jdk8
-- jdk11
+- postgresql
+- pgadmin4
+- brave-browser
+- code
+- postman
 - iriunwebcam
-
-
-
+- typescript
+- zsh
+- ohmyzsh
