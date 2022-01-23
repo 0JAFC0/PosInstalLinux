@@ -16,7 +16,6 @@ sudo echo -n "--------------"
 PROGRAMAS_PARA_INSTALAR=(
     git
     python3
-    nodejs
     docker
     docker-compose
     openjdk-8-jdk 
@@ -92,8 +91,7 @@ sudo mv ms_signing_key.gpg /etc/apt/trusted.gpg.d/
 # Adicionando chave de pacote do Pgadmin4
 printLinha "Adicionando Pacote do Pgadmin4"
 sudo curl https://www.pgadmin.org/static/packages_pgadmin_org.pub | sudo apt-key add
-
-sudo sh -c 'echo "deb https://ftp.postgresql.org/pub/pgadmin/pgadmin4/apt/$(lsb_release -cs) pgadmin4 main" > /etc/apt/sources.list.d/pgadmin4.list && apt update'
+sudo sh -c 'echo "deb https://ftp.postgresql.org/pub/pgadmin/pgadmin4/apt/bionic pgadmin4 main" > /etc/apt/sources.list.d/pgadmin4.list && apt update'
 
 # atualizando repositorios
 printLinha "Update"
@@ -123,9 +121,26 @@ else
     echo "[INSTALADO]" - Postman
 fi
 
-# Instalando o typescript
+
+# Instalando o nvm(Node Version Manager)
+printLinha "Instalando nvm"
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+
+# Exportando variaveis
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+
+#instalando o Node
+printLinha "Instalando o Nodejs"
+nvm install --lts
+
+# Instalando o Typescript
 printLinha "Instalando Typescript"
-npm install typescript -g
+npm install -g typescript
+
+# Instalando o Angular
+printLinha "Instalando Angular"
+npm install -g @angular/cli
 
 # Instalando o ohmyzsh
 printLinha "Instalando ohmyzsh"
