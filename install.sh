@@ -147,7 +147,7 @@ printLinha "Instalando ohmyzsh"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 # configurando o oh-my-zsh
-sed -i "s|ZSH_THEME='spaceship'|ZSH_THEME='agnoster'|g" ~/.zshrc
+#sed -i "s|ZSH_THEME='spaceship'|ZSH_THEME='agnoster'|g" ~/.zshrc
 
 # -------------- PÓS-INSTALAÇÃO --------------
 ## atualização e limpeza
