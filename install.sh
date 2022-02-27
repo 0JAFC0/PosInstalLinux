@@ -26,6 +26,8 @@ PROGRAMAS_PARA_INSTALAR=(
     postgresql
     pgadmin4
     brave-browser
+    firefox
+    transmission
     code
     zsh
 )
