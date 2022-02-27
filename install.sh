@@ -22,6 +22,7 @@ PROGRAMAS_PARA_INSTALAR=(
     openjdk-8-jdk 
     openjdk-11-jdk
     maven
+    typora
     postgresql
     pgadmin4
     brave-browser
@@ -93,6 +94,11 @@ sudo mv ms_signing_key.gpg /etc/apt/trusted.gpg.d/
 printLinha "Adicionando Pacote do Pgadmin4"
 sudo curl https://www.pgadmin.org/static/packages_pgadmin_org.pub | sudo apt-key add
 sudo sh -c 'echo "deb https://ftp.postgresql.org/pub/pgadmin/pgadmin4/apt/bionic pgadmin4 main" > /etc/apt/sources.list.d/pgadmin4.list && apt update'
+
+# Adicionando chave de pacote do typora
+printLinha "Adicionando pacote do typora"
+wget -qO - https://typora.io/linux/public-key.asc | sudo apt-key add -
+sudo add-apt-repository 'deb https://typora.io/linux ./'
 
 # atualizando repositorios
 printLinha "Update"
