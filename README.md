@@ -1,24 +1,26 @@
-# Automatizar-Pos-instalação-Do-ArchLinux
+# Automatizar-Pos-instalação-Do-Linux-Distros-based_debian
 
-Arch-linux-Pos-Install
-Shell Script de pós instalação do Arch Linux para utilização pessoal e também para aprendizagem de Shell.
+Pos Install based_debian
+Shell Script de pós instalação do para sistemas baseados no debian e Linux para utilização pessoal e também para aprendizagem de Shell.
 
 Automatização de instalação:
 
-- git
-- python3
-- nodejs
-- docker
-- docker-compose
-- openjdk-8-jdk 
-- openjdk-11-jdk
+- java jdk 8 e 11
 - maven
+- docker
+- deemix
+- vscode
+- brave
+- iriun web cam
+- typora
+- postman
+- python
+- oh-my-zsh
+- docker 
+- docker-composer
 - postgresql
 - pgadmin4
-- brave-browser
-- code
-- postman
-- iriunwebcam
-- typescript
-- zsh
-- ohmyzsh
+- nodejs:
+angular cli
+tpm
+typescript
