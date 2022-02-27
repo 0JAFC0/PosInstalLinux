@@ -16,6 +16,7 @@ sudo echo -n "--------------"
 PROGRAMAS_PARA_INSTALAR=(
     git
     python3
+    python3-pip
     docker
     docker-compose
     openjdk-8-jdk 
