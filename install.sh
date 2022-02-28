@@ -61,11 +61,11 @@ dpkgInstall() {
 }
 
 installPostman() {
-    file="$HOME/Postman"
+    file="./Postman"
     wget -O "$file" "$1"
     tar -xzf $file
     sudo mv $file /opt/
-    sudo ln -s /opt/Postman/Postman /usr/local/bin/postman
+    sudo ln -s /opt/Postman/app/Postman /usr/local/bin/postman
     rm -fv "$file"
 }
 
@@ -80,6 +80,7 @@ sudo apt install apt-transport-https curl
 # Adicionando chave de pacote do Brave
 printLinha "Adicionando Pacote do Brave"
 sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
+echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list
 
 # Adicionando chave de pacote do Docker e Docker-composer
 printLinha "Adicionando Pacote do Docker e Docker-composer"
@@ -87,10 +88,10 @@ sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add 
 
 # Adicionando chave de pacote do Code
 printLinha "Adicionando Pacote do vscode"
-curl -sSL https://packages.microsoft.com/keys/microsoft.asc -o microsoft.asc
-gpg --no-default-keyring --keyring ./ms_signing_key_temp.gpg --import ./microsoft.asc
-gpg --no-default-keyring --keyring ./ms_signing_key_temp.gpg --export > ./ms_signing_key.gpg
-sudo mv ms_signing_key.gpg /etc/apt/trusted.gpg.d/
+sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
+
+printLinha "Update"
+sudo apt update -y
 
 # Adicionando chave de pacote do Pgadmin4
 printLinha "Adicionando Pacote do Pgadmin4"
@@ -137,7 +138,7 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 
 # Exportando variaveis
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 
 #instalando o Node
 printLinha "Instalando o Nodejs"
@@ -153,7 +154,7 @@ npm install -g @angular/cli
 
 # Instalando o ohmyzsh
 printLinha "Instalando ohmyzsh"
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" -y
 
 # configurando o oh-my-zsh
 #sed -i "s|ZSH_THEME='spaceship'|ZSH_THEME='agnoster'|g" ~/.zshrc
