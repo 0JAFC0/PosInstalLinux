@@ -1,26 +1,28 @@
-# Automatizar-Pos-instalação-Do-Linux-Distros-based_debian
+# Automatizar-Pos-instalação-Do-Linux
 
-Pos Install based_debian
-Shell Script de pós instalação do para sistemas baseados no debian e Linux para utilização pessoal e também para aprendizagem de Shell.
+Posinstall SystemLinux
+Shell Script de pós instalação do para sistemas baseados no debian e para fedora e arch para utilização pessoal e também para aprendizagem de Shell.
 
 Automatização de instalação:
 
-- java jdk 8 e 11
+- git
+- python3
+- python3-pip
+- docker-ce
+- docker-ce-cli
+- containerd.io
+- docker-compose-plugin
+- openjdk-8-jdk 
+- openjdk-11-jdk
 - maven
-- docker
-- deemix
+- postgresql-server
+- postgresql-contrib
+- dbeave
+- brave-browser
+- firefox
 - vscode
-- brave
-- iriun web cam
-- typora
-- postman
-- python
-- oh-my-zsh
-- docker 
-- docker-composer
-- postgresql
-- pgadmin4
+- zsh
 - nodejs:
-angular cli
-tpm
-typescript
+  - angular cli
+  - tpm
+  - typescript
