@@ -4,9 +4,10 @@ system="`lsb_release -sd`"
 system_release="`lsb_release -sr`"
 system_architecture="`uname -m`"
 
-echo "LINUX DEVELOPMENT SCRIPT (LinuxMint)"
+echo "LINUX DEVELOPMENT SCRIPT (for systems based on debian)"
 echo "Author: 0jafc0"
 echo "System: $system"
+echo "System release: $system_release"
 echo "Architecture: $system_architecture"
 echo "Home: $HOME"
 echo "User: $USER"
@@ -158,6 +159,10 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 
 # configurando o oh-my-zsh
 #sed -i "s|ZSH_THEME='spaceship'|ZSH_THEME='agnoster'|g" ~/.zshrc
+
+# instalando thema dracula no typora
+#wget https://github.com/dracula/typora/archive/master.zip
+#unzip
 
 # -------------- PÓS-INSTALAÇÃO --------------
 ## atualização e limpeza
