@@ -1,7 +1,7 @@
 # Automatizar-Pos-instalação-Do-Linux
 
 Posinstall SystemLinux
-Shell Script de pós instalação do para sistemas baseados no debian e para fedora e arch para utilização pessoal e também para aprendizagem de Shell.
+Shell Script de pós instalação para sistemas baseados no debian, para fedora e arch. Script feito para utilização pessoal e também para aprendizagem de Shell.
 
 Automatização de instalação:
 
