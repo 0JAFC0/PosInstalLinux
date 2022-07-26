@@ -1,12 +1,11 @@
 #! /usr/bin/env bash
 # -------------- variaveis --------------
-system="$(lsb_release -sd)"
-system_release="$(lsb_release -sr)"
+system_release=$(cat -A /etc/fedora-release)
 system_architecture="$(uname -m)"
 
 echo "LINUX DEVELOPMENT SCRIPT (Fedora)"
 echo "Author: 0jafc0"
-echo "System: $system"
+echo "System: $system_release"
 echo "Architecture: $system_architecture"
 echo "Home: $HOME"
 echo "User: $USER"
@@ -26,7 +25,7 @@ PROGRAMAS_PARA_INSTALAR=(
   maven
   postgresql-server
   postgresql-contrib
-  dbeave
+  community-mysql-server
   brave-browser
   firefox
   code
@@ -78,14 +77,10 @@ sudo dnf config-manager \
     --add-repo \
     https://download.docker.com/linux/fedora/docker-ce.repo
 
-# Adicionando pacote postgresql
-sudo dnf install -y https://download.postgresql.org/pub/repos/yum/reporpms/F-36-x86_64/pgdg-fedora-repo-latest.noarch.rpm
+#habilitando modulo postgresl 14
+sudo dnf module enable postgresql:14 -y 
 
-# Adicionando pacote dbeaver
-sudo yum -y install wget
-wget https://dbeaver.io/files/dbeaver-ce-latest-stable.x86_64.rpm
-
-# Adicionando chave de pacote do vsCode
+# Adicionando chave do repositorio do vsCode
 printf "Adicionando Pacote do vscode"
 sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
 
@@ -107,10 +102,17 @@ for nome_programa in "${PROGRAMAS_PARA_INSTALAR[@]}"; do
 done
 
 # Instalando
+printLinha "[INSTALANDO...] docker desktop"
 sudo dnf install -y https://desktop.docker.com/linux/main/amd64/docker-desktop-4.10.1-x86_64.rpm
 
 # habilitando docker
+printf "iniciando docker"
 sudo systemctl start docker
+
+# Instalando pacote dbeaver
+
+sudo yum -y install wget
+wget https://dbeaver.io/files/dbeaver-ce-latest-stable.x86_64.rpm
 
 # habilitando postgresql
 sudo postgresql-setup initdb
