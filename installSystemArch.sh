@@ -37,8 +37,8 @@ sudo ln -s /var/lib/snapd/snap /snap
 
 # -------------- laços de instalação --------------
 # Instalando programas pelo pacman
-for nome_programa in ${PROGRAMAS_PARA_INSTALAR[@]}; do
-    $nome_programa = "code"
+for nome_programa in "${PROGRAMAS_PARA_INSTALAR[@]}"; do
+    nome_programa="code"
     if ! [ -x "$(command -v $nome_programa)" ]; then
         sudo pacman -S "$nome_programa"
         exit 1
@@ -48,7 +48,7 @@ for nome_programa in ${PROGRAMAS_PARA_INSTALAR[@]}; do
 done
 
 # Instalando programas pelo snap
-for nome_programa in ${PROGRAMAS_PARA_INSTALAR_SNAP[@]}; do
+for nome_programa in "${PROGRAMAS_PARA_INSTALAR[@]}"; do
     
     if [ $nome_programa == code ]; then
         sudo snap install "$nome_programa" --classic

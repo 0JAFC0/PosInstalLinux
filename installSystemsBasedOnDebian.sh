@@ -110,7 +110,7 @@ sudo apt update -y
 
 # -------------- laço de instalação --------------
 # Instalando programas pelo apt
-for nome_programa in ${PROGRAMAS_PARA_INSTALAR[@]}; do
+for nome_programa in "${PROGRAMAS_PARA_INSTALAR[@]}"; do
     if ! [ -x "$(command -v $nome_programa)" ]; then
         printLinha "[INSTALANDO...] $nome_programa"
         sudo apt install "$nome_programa" -y
