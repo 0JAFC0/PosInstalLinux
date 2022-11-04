@@ -20,8 +20,12 @@ PROGRAMAS_PARA_INSTALAR=(
   docker-ce-cli
   containerd.io
   docker-compose-plugin
-  openjdk-8-jdk 
-  openjdk-11-jdk
+  java-1.8.0-openjdk
+  java-1.8.0-openjdk-devel
+  java-1.8.0-openjdk-headless
+  java-11-openjdk
+  java-11-openjdk-devel
+  java-11-openjdk-headless
   maven
   postgresql-server
   postgresql-contrib
@@ -76,6 +80,11 @@ printf "Adicionando Pacote do Docker e Docker-composer"
 sudo dnf config-manager \
     --add-repo \
     https://download.docker.com/linux/fedora/docker-ce.repo
+
+# Baixando docker desktop
+printf "Baixando docker desktop e instalando"
+wget -o docker-desktop.rpm https://desktop.docker.com/linux/main/amd64/docker-desktop-4.13.1-x86_64.rpm?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64
+./docker-desktop.rpm
 
 #habilitando modulo postgresl 14
 sudo dnf module enable postgresql:14 -y 
