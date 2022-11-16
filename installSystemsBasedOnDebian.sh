@@ -15,22 +15,26 @@ sudo echo -n "--------------"
 
 # -------------- Lista --------------
 PROGRAMAS_PARA_INSTALAR=(
-    git
-    python3
-    python3-pip
-    docker
-    docker-compose
-    openjdk-8-jdk 
-    openjdk-11-jdk
-    maven
-    typora
-    postgresql
-    pgadmin4
-    brave-browser
-    firefox
-    transmission
-    code
-    zsh
+  git
+  python3
+  python3-pip
+  docker-ce
+  docker-ce-cli
+  containerd.io
+  docker-compose-plugin
+  java-1.8.0-openjdk
+  java-1.8.0-openjdk-devel
+  java-1.8.0-openjdk-headless
+  java-11-openjdk
+  java-11-openjdk-devel
+  java-11-openjdk-headless
+  maven
+  postgresql-server
+  postgresql-contrib
+  community-mysql-server
+  brave-browser
+  code
+  zsh
 )
 
 # -------------- Funções --------------
@@ -91,19 +95,6 @@ sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add 
 printLinha "Adicionando Pacote do vscode"
 sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
 
-printLinha "Update"
-sudo apt update -y
-
-# Adicionando chave de pacote do Pgadmin4
-printLinha "Adicionando Pacote do Pgadmin4"
-sudo curl https://www.pgadmin.org/static/packages_pgadmin_org.pub | sudo apt-key add
-sudo sh -c 'echo "deb https://ftp.postgresql.org/pub/pgadmin/pgadmin4/apt/bionic pgadmin4 main" > /etc/apt/sources.list.d/pgadmin4.list && apt update'
-
-# Adicionando chave de pacote do typora
-printLinha "Adicionando pacote do typora"
-wget -qO - https://typora.io/linux/public-key.asc | sudo apt-key add -
-sudo add-apt-repository 'deb https://typora.io/linux ./'
-
 # atualizando repositorios
 printLinha "Update"
 sudo apt update -y
@@ -132,10 +123,17 @@ else
     echo "[INSTALADO]" - Postman
 fi
 
+# Instalando
+printLinha "[INSTALANDO...] docker desktop"
+sudo apt install -y "https://desktop.docker.com/linux/main/amd64/docker-desktop-4.13.1-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64"
+
+# Instalando pacote dbeaver
+sudo yum -y install wget
+wget "https://dbeaver.io/files/dbeaver-ce_latest_amd64.deb"
 
 # Instalando o nvm(Node Version Manager)
 printLinha "Instalando nvm"
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+curl -o- "https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh" | bash
 
 # Exportando variaveis
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
@@ -152,6 +150,10 @@ npm install -g typescript
 # Instalando o Angular
 printLinha "Instalando Angular"
 npm install -g @angular/cli
+
+# Instalando o angular cli ghpages
+printf "Instalando Angular/cli ghpages"
+npm install -g angular-cli-ghpages
 
 # Instalando o ohmyzsh
 printLinha "Instalando ohmyzsh"
