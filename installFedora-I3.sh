@@ -33,6 +33,7 @@ PROGRAMAS_PARA_INSTALAR=(
   brave-browser
   code
   zsh
+  powerline-fonts
 )
 
 # -------------- Funções --------------
@@ -85,15 +86,6 @@ printf "Baixando docker desktop e instalando"
 wget -o docker-desktop.rpm https://desktop.docker.com/linux/main/amd64/docker-desktop-4.13.1-x86_64.rpm?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64
 ./docker-desktop.rpm
 
-# Baixando dockerCredential
-printf "Baixando dockerCredential"
-wget https://github.com/docker/docker-credential-helpers/releases/download/v0.6.0/docker-credential-pass-v0.6.0-amd64.tar.gz && tar -xf docker-credential-pass-v0.6.0-amd64.tar.gz && chmod +x docker-credential-pass && sudo mv docker-credential-pass /usr/local/bin/
-
-gpg2 --gen-key
-pass init "0jafc0"
-sed -i '0,/{/s/{/{\n\t"credsStore": "pass",/' ~/.docker/config.json
-docker login
-
 #habilitando modulo postgresl 14
 sudo dnf module enable postgresql:14 -y 
 
@@ -118,13 +110,13 @@ for nome_programa in "${PROGRAMAS_PARA_INSTALAR[@]}"; do
     fi
 done
 
-# Instalando
-printLinha "[INSTALANDO...] docker desktop"
-sudo dnf install -y https://desktop.docker.com/linux/main/amd64/docker-desktop-4.10.1-x86_64.rpm
-
 # habilitando docker
 printf "iniciando docker"
-sudo systemctl start docker
+sudo systemctl enable docker
+
+# setando permissions
+sudo groupadd docker
+sudo usermod -aG docker "$USER"
 
 # Instalando pacote dbeaver
 sudo yum -y install wget
@@ -165,8 +157,50 @@ npm install -g angular-cli-ghpages
 printf "Instalando ohmyzsh"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" -y
 
+# Instalando o tema
+printLinha "Clonando tema"
+git clone https://github.com/denysdovhan/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt" --depth=1
+ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme"
+
+# Instalando o ZSH Syntax Highlighting
+printLinha "Clonando syntax highlighting"
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}"/plugins/zsh-syntax-highlighting
+
+# Instalando o autosuggestions
+printLinha "Clonando autosuggestions"
+git clone https://github.com/zsh-users/zsh-autosuggestions "$ZSH_CUSTOM"/plugins/zsh-autosuggestions
+
 # configurando o oh-my-zsh
-#sed -i "s|ZSH_THEME='spaceship'|ZSH_THEME='agnoster'|g" ~/.zshrc
+printLinha "Configurando o oh-my-zsh"
+sed -i 's/ZSH_THEME="robbyrussell"/ZSH_THEME="spaceship"/g' ~/.zshrc
+sed -i 's/plugins=(git)/plugins=(git zsh-syntax-highlighting zsh-autosuggestions)/g' ~/.zshrc
+
+# Instalando thema gtk do dracula
+printLinha "Instalando thema gtk do dracula"
+wget "https://github.com/dracula/gtk/archive/master.zip"
+unzip master.zip
+mkdir ~/.themes/
+sudo mv ~/gtk-master ~/.themes/
+exec gsettings set org.gnome.desktop.interface gtk-theme "Dracula"
+exec gsettings set org.gnome.desktop.wm.preferences theme "Dracula"
+rm ~/master.zip
+
+# instalando theme icon dracula
+printLinha "instalando theme icon dracula"
+wget "https://github.com/dracula/gtk/files/5214870/Dracula.zip"
+unzip Dracula.zip
+mkdir ~/.icons/
+sudo mv ~/Dracula ~/.icons/
+rm ~/Dracula.zip
+
+# Instalando thema do terminal do dracula
+printLinha "Instalando thema do terminal do dracula"
+wget "https://github.com/dracula/xfce4-terminal/archive/master.zip"
+unzip ~/master.zip
+mkdir ~/.config/xfce4/terminal/colorschemes/
+sudo mv ~/xfce4-terminal-master/Dracula.theme ~/.config/xfce4/terminal/colorschemes/
+rm ~/master.zip
+rm -r ~/xfce4-terminal-master
 
 # -------------- PÓS-INSTALAÇÃO --------------
 ## atualização e limpeza
